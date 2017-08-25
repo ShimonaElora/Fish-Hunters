@@ -9,7 +9,6 @@ public class FishScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         baitSpawnPoint = GameObject.Find("baitSpawnPoint").GetComponent<Transform>();
-        Debug.Log(baitSpawnPoint.position.x);
         if (transform.position.x > baitSpawnPoint.position.x)
         {
             GetComponent<SpriteRenderer>().flipX = true;
