@@ -10,9 +10,10 @@ public class FishSpawnScript : MonoBehaviour {
 
     public Transform baitSpawnPoint;
 
-    public GameObject Fish;
+    public GameObject[] Fish;
 
-    float speed = 15f;
+    float speedHorizontal = 400f;
+    float speedVertical = 400f;
 
     private bool startWaitBool = true;
     private bool startForeBool = true;
@@ -68,12 +69,12 @@ public class FishSpawnScript : MonoBehaviour {
 
         if (spawnPosition.x < baitSpawnPoint.position.x)
         {
-            Instantiate(Fish, spawnPosition, Fish.GetComponent<Transform>().rotation)
-                .GetComponent<Rigidbody2D>().AddForce(new Vector2((baitSpawnPoint.position.x - transform.position.x) * 500f, (baitSpawnPoint.position.y - transform.position.y) * 1000f), ForceMode2D.Force);
+            Instantiate(Fish[0], spawnPosition, Fish[0].GetComponent<Transform>().rotation)
+                .GetComponent<Rigidbody2D>().AddForce(new Vector2((baitSpawnPoint.position.x - transform.position.x) * speedHorizontal, (baitSpawnPoint.position.y - transform.position.y) * speedVertical), ForceMode2D.Force);
         } else
         {
-            Instantiate(Fish, spawnPosition, Fish.GetComponent<Transform>().rotation)
-               .GetComponent<Rigidbody2D>().AddForce(new Vector2( (baitSpawnPoint.position.x - transform.position.x) * -500f, (baitSpawnPoint.position.y - transform.position.y) * 1000f), ForceMode2D.Force);
+            Instantiate(Fish[1], spawnPosition, Fish[1].GetComponent<Transform>().rotation)
+               .GetComponent<Rigidbody2D>().AddForce(new Vector2( (baitSpawnPoint.position.x - transform.position.x) * -speedHorizontal, (baitSpawnPoint.position.y - transform.position.y) * speedVertical), ForceMode2D.Force);
         }
 
         startForeBool = true;
@@ -90,13 +91,13 @@ public class FishSpawnScript : MonoBehaviour {
 
         if (spawnPosition.x < baitSpawnPoint.position.x)
         {
-            Instantiate(Fish, spawnPosition, Fish.GetComponent<Transform>().rotation)
-                .GetComponent<Rigidbody2D>().AddForce(new Vector2((baitSpawnPoint.position.x - transform.position.x) * 500f, (baitSpawnPoint.position.y - transform.position.y) * 1000f), ForceMode2D.Force);
+            Instantiate(Fish[0], spawnPosition, Fish[0].GetComponent<Transform>().rotation)
+                .GetComponent<Rigidbody2D>().AddForce(new Vector2((baitSpawnPoint.position.x - transform.position.x) * speedHorizontal, (baitSpawnPoint.position.y - transform.position.y) * speedVertical), ForceMode2D.Force);
         }
         else
         {
-            Instantiate(Fish, spawnPosition, Fish.GetComponent<Transform>().rotation)
-               .GetComponent<Rigidbody2D>().AddForce(new Vector2((baitSpawnPoint.position.x - transform.position.x) * -500f, (baitSpawnPoint.position.y - transform.position.y) * 1000f), ForceMode2D.Force);
+            Instantiate(Fish[1], spawnPosition, Fish[1].GetComponent<Transform>().rotation)
+               .GetComponent<Rigidbody2D>().AddForce(new Vector2((baitSpawnPoint.position.x - transform.position.x) * -speedHorizontal, (baitSpawnPoint.position.y - transform.position.y) * speedVertical), ForceMode2D.Force);
         }
 
         startMidBool = true;
@@ -113,13 +114,13 @@ public class FishSpawnScript : MonoBehaviour {
 
         if (spawnPosition.x < baitSpawnPoint.position.x)
         {
-            Instantiate(Fish, spawnPosition, Fish.GetComponent<Transform>().rotation)
-                .GetComponent<Rigidbody2D>().AddForce(new Vector2((baitSpawnPoint.position.x - transform.position.x) * 500f, (baitSpawnPoint.position.y - transform.position.y) * 1000f), ForceMode2D.Force);
+            Instantiate(Fish[0], spawnPosition, Fish[0].GetComponent<Transform>().rotation)
+                .GetComponent<Rigidbody2D>().AddForce(new Vector2((baitSpawnPoint.position.x - transform.position.x) * speedHorizontal, (baitSpawnPoint.position.y - transform.position.y) * speedVertical), ForceMode2D.Force);
         }
         else
         {
-            Instantiate(Fish, spawnPosition, Fish.GetComponent<Transform>().rotation)
-               .GetComponent<Rigidbody2D>().AddForce(new Vector2((baitSpawnPoint.position.x - transform.position.x) * -500f, (baitSpawnPoint.position.y - transform.position.y) * 1000f), ForceMode2D.Force);
+            Instantiate(Fish[1], spawnPosition, Fish[1].GetComponent<Transform>().rotation)
+               .GetComponent<Rigidbody2D>().AddForce(new Vector2((baitSpawnPoint.position.x - transform.position.x) * -speedHorizontal, (baitSpawnPoint.position.y - transform.position.y) * speedVertical), ForceMode2D.Force);
         }
 
         startBackBool = true;
