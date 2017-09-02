@@ -12,9 +12,13 @@ public class BulletScript : MonoBehaviour {
     GameObject fishGameObject;
     Quaternion rotationFish;
 
+    float setXForGravity;
+
 	// Use this for initialization
 	void Start () {
 		
+
+
 	}
 	
 	// Update is called once per frame
@@ -30,6 +34,10 @@ public class BulletScript : MonoBehaviour {
             fishGameObject.GetComponent<Transform>().rotation = rotationFish;
         }
 
+        if (transform.position.x > setXForGravity)
+        {
+            GetComponent<Rigidbody2D>().gravityScale = 5f;
+        }
 	}
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -40,5 +48,10 @@ public class BulletScript : MonoBehaviour {
             rotationFish = fishGameObject.GetComponent<Transform>().rotation;
             moveWith = true;
         }
+    }
+
+    public void ParameterSetup (float posX)
+    {
+        setXForGravity = posX;
     }
 }

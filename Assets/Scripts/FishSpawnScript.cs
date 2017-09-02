@@ -7,6 +7,7 @@ public class FishSpawnScript : MonoBehaviour {
     public Transform[] foreSpawnPoints;
     public Transform[] midSpawnPoints;
     public Transform[] backSpawnPoints;
+    public GameObject shadow;
 
     public Transform baitSpawnPoint;
 
@@ -67,6 +68,10 @@ public class FishSpawnScript : MonoBehaviour {
 
         Vector3 spawnPosition = new Vector3(spawnPoint.position.x, spawnPoint.position.y, spawnPoint.position.z);
 
+        Instantiate(shadow, spawnPosition, shadow.GetComponent<Transform>().rotation);
+
+        yield return new WaitForSeconds(1);
+
         if (spawnPosition.x < baitSpawnPoint.position.x)
         {
             Instantiate(Fish[0], spawnPosition, Fish[0].GetComponent<Transform>().rotation)
@@ -88,6 +93,10 @@ public class FishSpawnScript : MonoBehaviour {
         Transform spawnPoint = midSpawnPoints[Random.Range(0, 5)];
 
         Vector3 spawnPosition = new Vector3(spawnPoint.position.x, spawnPoint.position.y, spawnPoint.position.z);
+
+        Instantiate(shadow, spawnPosition, shadow.GetComponent<Transform>().rotation);
+
+        yield return new WaitForSeconds(1);
 
         if (spawnPosition.x < baitSpawnPoint.position.x)
         {
@@ -111,6 +120,10 @@ public class FishSpawnScript : MonoBehaviour {
         Transform spawnPoint = backSpawnPoints[Random.Range(0, 5)];
 
         Vector3 spawnPosition = new Vector3(spawnPoint.position.x, spawnPoint.position.y, spawnPoint.position.z);
+
+        Instantiate(shadow, spawnPosition, shadow.GetComponent<Transform>().rotation);
+
+        yield return new WaitForSeconds(1);
 
         if (spawnPosition.x < baitSpawnPoint.position.x)
         {
