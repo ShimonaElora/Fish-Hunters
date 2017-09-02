@@ -34,6 +34,7 @@ public class GunScript : MonoBehaviour {
         {
             touch = Input.GetTouch(0);
             touchPos = Camera.main.ScreenToWorldPoint(touch.position);
+            touchPos.x = Mathf.Clamp(touchPos.x, -3.5f, touchPos.x);
 
             if (touchPos.x > transform.position.x)
             {
@@ -41,20 +42,22 @@ public class GunScript : MonoBehaviour {
                 {
                     restoreRotation = 1;
                     reverse = 4f;
-                    rotateAngle = touchPos.y - transform.position.y;
+                    Debug.Log(touchPos.y + " " + touchPos.x);
+                    rotateAngle = Mathf.Atan( (touchPos.y - transform.position.y)/(touchPos.x - transform.position.x) );
                 }
                 else
                 {
                     restoreRotation = 2;
                     reverse = 4f;
-                    rotateAngle = transform.position.y - touchPos.y;
+                    rotateAngle = - Mathf.Atan((touchPos.y - transform.position.y) / (touchPos.x - transform.position.x));
                 }
-                
-                bulletRotation = new Quaternion( 0, 0, -transform.rotation.z * 2, 4f);
+
+                float angle = Mathf.Atan2((touchPos.y - transform.position.y), (touchPos.x - transform.position.x)) * Mathf.Rad2Deg;
+                bulletRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
                 GameObject bullet = (GameObject)Instantiate(Bullet, bulletSpawnPoint.position, bulletRotation);
                 bullet.GetComponent<Rigidbody2D>().AddForce(
-                    new Vector2((touchPos.x - transform.position.x), 0).normalized * 6500f + new Vector2(0, (touchPos.y - transform.position.y) * 900f), 
+                    (touchPos - transform.position) * 2500f, 
                     ForceMode2D.Force
                 );
                 bullet.GetComponent<BulletScript>().ParameterSetup(touchPos.x);
@@ -78,22 +81,23 @@ public class GunScript : MonoBehaviour {
         }
         else if (restoreRotation == 1 && reverse > 0)
         {
-            float angle = Quaternion.Angle(transform.rotation, markerDown.rotation);
-            Debug.Log(angle + " " + rotateAngle);
-            if (rotateAngle <= angle)
+            float angle = Quaternion.Angle(originalRotation, transform.rotation);
+            Debug.Log(angle + " "+ rotateAngle + transform.rotation);
+            if (angle <= 75f)
             {
-                transform.Rotate(Vector3.forward, rotateAngle * 0.7f);
+                transform.Rotate(Vector3.forward, rotateAngle * 4f);
             }
-            reverse -= Time.deltaTime * 30f;
+            reverse -= Time.deltaTime * 20f;
         }
         else if (restoreRotation == 2 && reverse > 0)
         {
-            float angle = Quaternion.Angle(transform.rotation, markerUp.rotation);
-            if (rotateAngle <= angle)
+            float angle = Quaternion.Angle(originalRotation, transform.rotation);
+            Debug.Log(angle + " " + rotateAngle + transform.rotation);
+            if (angle <= 75f)
             {
-                transform.Rotate(Vector3.back, rotateAngle * 1.2f);
+                transform.Rotate(Vector3.back, rotateAngle * 4f);
             }
-            reverse -= Time.deltaTime * 30f;
+            reverse -= Time.deltaTime * 20f;
         }
     }
 

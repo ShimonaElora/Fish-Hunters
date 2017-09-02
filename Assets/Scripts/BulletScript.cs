@@ -34,10 +34,6 @@ public class BulletScript : MonoBehaviour {
             fishGameObject.GetComponent<Transform>().rotation = rotationFish;
         }
 
-        if (transform.position.x > setXForGravity)
-        {
-            GetComponent<Rigidbody2D>().gravityScale = 5f;
-        }
 	}
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -45,6 +41,8 @@ public class BulletScript : MonoBehaviour {
         if (collision.collider.tag == "fish")
         {
             fishGameObject = collision.collider.gameObject;
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            rb.gravityScale = 15f;
             rotationFish = fishGameObject.GetComponent<Transform>().rotation;
             moveWith = true;
         }
