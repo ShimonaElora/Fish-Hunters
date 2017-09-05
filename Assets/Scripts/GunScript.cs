@@ -18,6 +18,8 @@ public class GunScript : MonoBehaviour {
 
     Quaternion bulletRotation;
 
+    public float speed;
+
     float rotateAngle;
 
     // Use this for initialization
@@ -57,7 +59,7 @@ public class GunScript : MonoBehaviour {
 
                 GameObject bullet = (GameObject)Instantiate(Bullet, bulletSpawnPoint.position, bulletRotation);
                 bullet.GetComponent<Rigidbody2D>().AddForce(
-                    (touchPos - transform.position) * 2500f, 
+                    (touchPos - transform.position) * speed, 
                     ForceMode2D.Force
                 );
                 bullet.GetComponent<BulletScript>().ParameterSetup(touchPos.x);

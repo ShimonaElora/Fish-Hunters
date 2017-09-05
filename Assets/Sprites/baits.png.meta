@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: 7603d8e44ea644744b6adf08a30efda2
-timeCreated: 1503611311
+guid: a53c7241d33983c4a947e9d1ef557d06
+timeCreated: 1504582287
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: fish sprite_0
-    21300002: fish sprite_1
-    21300004: fish sprite_2
-    21300006: fish sprite_3
-    21300008: fish sprite_4
+    21300000: baits_0
+    21300002: baits_1
+    21300004: baits_2
+    21300006: baits_3
+    21300008: baits_4
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -91,65 +91,65 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fish sprite_0
+      name: baits_0
       rect:
         serializedVersion: 2
-        x: 104
-        y: 580
-        width: 302
-        height: 109
+        x: 97
+        y: 2582
+        width: 322
+        height: 324
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: fish sprite_1
+      name: baits_1
       rect:
         serializedVersion: 2
-        x: 106
-        y: 449
-        width: 300
-        height: 109
+        x: 97
+        y: 1948
+        width: 322
+        height: 329
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: fish sprite_2
+      name: baits_2
       rect:
         serializedVersion: 2
-        x: 107
-        y: 306
-        width: 299
-        height: 109
+        x: 97
+        y: 1320
+        width: 322
+        height: 323
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: fish sprite_3
+      name: baits_3
       rect:
         serializedVersion: 2
-        x: 108
-        y: 172
-        width: 299
-        height: 110
+        x: 97
+        y: 645
+        width: 322
+        height: 323
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: fish sprite_4
+      name: baits_4
       rect:
         serializedVersion: 2
-        x: 107
-        y: 18
-        width: 299
-        height: 122
+        x: 97
+        y: 22
+        width: 322
+        height: 326
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
