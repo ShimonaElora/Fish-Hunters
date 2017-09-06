@@ -7,6 +7,7 @@ public class FishScript : MonoBehaviour {
     Transform baitSpawnPoint;
     Vector3 distance;
     public bool touchedBait = false;
+    public GameObject bait;
 
 	// Use this for initialization
 	void Start () {

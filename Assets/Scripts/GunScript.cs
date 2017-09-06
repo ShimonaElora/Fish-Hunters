@@ -22,21 +22,25 @@ public class GunScript : MonoBehaviour {
 
     float rotateAngle;
 
+    Quaternion maxAngle;
+
     // Use this for initialization
     void Start () {
         restoreRotation = 0;
         originalRotation = transform.rotation;
         reverse = 7f;
+        maxAngle = transform.rotation;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !GameoverScript.gameover)
         {
             touch = Input.GetTouch(0);
             touchPos = Camera.main.ScreenToWorldPoint(touch.position);
             touchPos.x = Mathf.Clamp(touchPos.x, -3.5f, touchPos.x);
+            touchPos.y = Mathf.Clamp(touchPos.y, transform.position.y, touchPos.y);
 
             if (touchPos.x > transform.position.x)
             {
@@ -46,12 +50,14 @@ public class GunScript : MonoBehaviour {
                     reverse = 4f;
                     Debug.Log(touchPos.y + " " + touchPos.x);
                     rotateAngle = Mathf.Atan( (touchPos.y - transform.position.y)/(touchPos.x - transform.position.x) );
+                    //Debug.Log(maxAngle1 + " " + transform.rotation.eulerAngles.magnitude);
                 }
                 else
                 {
                     restoreRotation = 2;
                     reverse = 4f;
                     rotateAngle = - Mathf.Atan((touchPos.y - transform.position.y) / (touchPos.x - transform.position.x));
+                    maxAngle = Quaternion.FromToRotation(transform.position, touchPos);
                 }
 
                 float angle = Mathf.Atan2((touchPos.y - transform.position.y), (touchPos.x - transform.position.x)) * Mathf.Rad2Deg;
@@ -59,7 +65,7 @@ public class GunScript : MonoBehaviour {
 
                 GameObject bullet = (GameObject)Instantiate(Bullet, bulletSpawnPoint.position, bulletRotation);
                 bullet.GetComponent<Rigidbody2D>().AddForce(
-                    (touchPos - transform.position) * speed, 
+                    (touchPos - transform.position).normalized * speed, 
                     ForceMode2D.Force
                 );
                 bullet.GetComponent<BulletScript>().ParameterSetup(touchPos.x);

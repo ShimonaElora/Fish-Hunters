@@ -15,10 +15,10 @@ public class DestroyerScript : MonoBehaviour {
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
+    { 
         if (collision.GetComponent<Collider2D>().tag == "fish" && collision.GetComponent<Collider2D>().gameObject.GetComponent<FishScript>().touchedBait == true && gameObject.name == "destroyerVertical")
         {
-            BaitScript.initialCount++;
+            collision.GetComponent<Collider2D>().gameObject.GetComponent<FishScript>().bait.GetComponent<BaitScript>().initialCount++;      
         }
         if (collision.gameObject.transform.parent)
         {
@@ -34,7 +34,7 @@ public class DestroyerScript : MonoBehaviour {
     {
         if (collision.GetComponent<Collider2D>().tag == "fish" && collision.GetComponent<Collider2D>().gameObject.GetComponent<FishScript>().touchedBait == true && gameObject.name == "destroyerVertical")
         {
-            BaitScript.initialCount++;
+            collision.GetComponent<Collider2D>().gameObject.GetComponent<FishScript>().bait.GetComponent<BaitScript>().initialCount++;
         }
         if (collision.gameObject.transform.parent)
         {

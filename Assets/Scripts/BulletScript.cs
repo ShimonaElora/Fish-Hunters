@@ -42,8 +42,11 @@ public class BulletScript : MonoBehaviour {
         {
             fishGameObject = collision.collider.gameObject;
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            rb.gravityScale = 15f;
+            rb.gravityScale = 20f;
+            rb.drag = 4f;
             rotationFish = fishGameObject.GetComponent<Transform>().rotation;
+            fishGameObject.GetComponent<Collider2D>().isTrigger = true;
+            GetComponent<Collider2D>().isTrigger = true;
             moveWith = true;
         }
     }
