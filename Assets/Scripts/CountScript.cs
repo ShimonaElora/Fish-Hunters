@@ -9,6 +9,8 @@ public class CountScript : MonoBehaviour {
 
     public Text countScore;
 
+    GameObject fish;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -23,9 +25,14 @@ public class CountScript : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Collider2D>().tag == "fish")
+        if (collision.GetComponent<Collider2D>().tag == "fish" && collision.GetComponent<Collider2D>().gameObject != fish)
         {
             count++;
+            fish = collision.GetComponent<Collider2D>().gameObject;
+        }
+        if (collision.GetComponent<Collider2D>().tag == "fish" && collision.GetComponent<Collider2D>().gameObject.GetComponent<FishScript>().touchedBait)
+        {
+            collision.GetComponent<Collider2D>().gameObject.GetComponent<FishScript>().bait.GetComponent<BaitScript>().initialCount++;
         }
     }
 }
