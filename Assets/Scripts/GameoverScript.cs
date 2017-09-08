@@ -27,6 +27,6 @@ public class GameoverScript : MonoBehaviour {
 
     void replayClicked()
     {
-        SceneManager.LoadScene("GamePlay");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -6,6 +6,7 @@ public class GunScript : MonoBehaviour {
 
     public GameObject Bullet;
     public Transform bulletSpawnPoint;
+    public Transform rotationIndicator;
 
     private Touch touch;
     private Vector3 touchPos;
@@ -35,6 +36,8 @@ public class GunScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        Debug.DrawLine(transform.position, rotationIndicator.position);
+
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !GameoverScript.gameover)
         {
             touch = Input.GetTouch(0);
@@ -48,7 +51,6 @@ public class GunScript : MonoBehaviour {
                 {
                     restoreRotation = 1;
                     reverse = 4f;
-                    Debug.Log(touchPos.y + " " + touchPos.x);
                     rotateAngle = Mathf.Atan( (touchPos.y - transform.position.y)/(touchPos.x - transform.position.x) );
                     //Debug.Log(maxAngle1 + " " + transform.rotation.eulerAngles.magnitude);
                 }
@@ -90,10 +92,9 @@ public class GunScript : MonoBehaviour {
         else if (restoreRotation == 1 && reverse > 0)
         {
             float angle = Quaternion.Angle(originalRotation, transform.rotation);
-            Debug.Log(angle + " "+ rotateAngle + transform.rotation);
-            if (angle <= 75f)
+            if (angle <= 78f)
             {
-                transform.Rotate(Vector3.forward, rotateAngle * 4f);
+                transform.Rotate(Vector3.forward, rotateAngle * rotationFactor(new Ray2D(transform.position, rotationIndicator.position), touchPos));
             }
             reverse -= Time.deltaTime * 20f;
         }
@@ -103,10 +104,16 @@ public class GunScript : MonoBehaviour {
             Debug.Log(angle + " " + rotateAngle + transform.rotation);
             if (angle <= 75f)
             {
-                transform.Rotate(Vector3.back, rotateAngle * 4f);
+                transform.Rotate(Vector3.back, rotateAngle * rotationFactor(new Ray2D(transform.position, rotationIndicator.position), touchPos));
             }
             reverse -= Time.deltaTime * 20f;
         }
+    }
+
+    float rotationFactor(Ray2D ray, Vector2 point)
+    {
+        Debug.Log(Vector3.Cross(ray.direction, point - ray.origin).magnitude);
+        return Vector3.Cross(ray.direction, point - ray.origin).magnitude;
     }
 
 }

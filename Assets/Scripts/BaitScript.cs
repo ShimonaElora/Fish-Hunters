@@ -20,7 +20,7 @@ public class BaitScript : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Collider2D>().tag == "fish")
+        if (collision.GetComponent<Collider2D>().tag == "fish" && !collision.GetComponent<Collider2D>().gameObject.GetComponent<FishScript>().touchedBait && !collision.GetComponent<Collider2D>().gameObject.GetComponent<FishScript>().collided)
         {
             collision.GetComponent<Collider2D>().gameObject.GetComponent<FishScript>().touchedBait = true;
             collision.GetComponent<Collider2D>().gameObject.GetComponent<FishScript>().bait = gameObject;
