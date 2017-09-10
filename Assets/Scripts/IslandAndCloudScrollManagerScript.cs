@@ -17,6 +17,7 @@ public class IslandAndCloudScrollManagerScript : MonoBehaviour {
     {
         StartCoroutine(cloudGenerator());
         StartCoroutine(islandGenerator());
+        GameObject.Find("water").GetComponent<WaterScrollerScript>().scrollSpeed = speed * 0.6f / 10;
     }
 
     // Update is called once per frame
