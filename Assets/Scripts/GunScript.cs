@@ -23,14 +23,11 @@ public class GunScript : MonoBehaviour {
 
     float rotateAngle;
 
-    Quaternion maxAngle;
-
     // Use this for initialization
     void Start () {
         restoreRotation = 0;
         originalRotation = transform.rotation;
         reverse = 7f;
-        maxAngle = transform.rotation;
     }
 	
 	// Update is called once per frame
@@ -52,14 +49,12 @@ public class GunScript : MonoBehaviour {
                     restoreRotation = 1;
                     reverse = 4f;
                     rotateAngle = Mathf.Atan( (touchPos.y - transform.position.y)/(touchPos.x - transform.position.x) );
-                    //Debug.Log(maxAngle1 + " " + transform.rotation.eulerAngles.magnitude);
                 }
                 else
                 {
                     restoreRotation = 2;
                     reverse = 4f;
                     rotateAngle = - Mathf.Atan((touchPos.y - transform.position.y) / (touchPos.x - transform.position.x));
-                    maxAngle = Quaternion.FromToRotation(transform.position, touchPos);
                 }
 
                 float angle = Mathf.Atan2((touchPos.y - transform.position.y), (touchPos.x - transform.position.x)) * Mathf.Rad2Deg;
@@ -72,7 +67,6 @@ public class GunScript : MonoBehaviour {
                 );
                 bullet.GetComponent<BulletScript>().ParameterSetup(touchPos.x);
             }
-            //transform.position = new Vector3(transform.position.x, touchPos.y, transform.position.z);
         }
 
         if (reverse <= 1.2f)
@@ -92,19 +86,9 @@ public class GunScript : MonoBehaviour {
         else if (restoreRotation == 1 && reverse > 0)
         {
             float angle = Quaternion.Angle(originalRotation, transform.rotation);
-            if (angle <= 78f)
+            if (angle <= 82f)
             {
                 transform.Rotate(Vector3.forward, rotateAngle * rotationFactor(new Ray2D(transform.position, rotationIndicator.position), touchPos));
-            }
-            reverse -= Time.deltaTime * 20f;
-        }
-        else if (restoreRotation == 2 && reverse > 0)
-        {
-            float angle = Quaternion.Angle(originalRotation, transform.rotation);
-            Debug.Log(angle + " " + rotateAngle + transform.rotation);
-            if (angle <= 75f)
-            {
-                transform.Rotate(Vector3.back, rotateAngle * rotationFactor(new Ray2D(transform.position, rotationIndicator.position), touchPos));
             }
             reverse -= Time.deltaTime * 20f;
         }
@@ -112,7 +96,6 @@ public class GunScript : MonoBehaviour {
 
     float rotationFactor(Ray2D ray, Vector2 point)
     {
-        Debug.Log(Vector3.Cross(ray.direction, point - ray.origin).magnitude);
         return Vector3.Cross(ray.direction, point - ray.origin).magnitude;
     }
 

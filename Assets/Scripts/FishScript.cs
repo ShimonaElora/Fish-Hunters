@@ -13,13 +13,20 @@ public class FishScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         touchedBait = false;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
         if (GameoverScript.gameover)
         {
             GetComponent<Collider2D>().enabled = false;
+        }
+        if (touchedBait)
+        {
+            for (int i = 0; i < GameObject.Find("Mast, Hooks and Bait").GetComponent<HookManagerScript>().numberHooks; i++)
+            {
+                Physics2D.IgnoreCollision(GetComponent<Collider2D>(), GameObject.FindGameObjectsWithTag("bait")[i].GetComponent<Collider2D>());
+            }
         }
     }
 

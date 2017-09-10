@@ -6,8 +6,7 @@ public class BulletScript : MonoBehaviour {
 
     Transform rightThreshold;
 
-    float offsetX = 0.1f;
-    float offsetY;
+    private Transform collisionPoint;
 
     bool moveWith = false;
 
@@ -19,10 +18,7 @@ public class BulletScript : MonoBehaviour {
     bool comboStall = false;
 
     bool collided;
-
-    Transform initialPosition;
-
-    public float gravityFactor;
+    
     float totalGravity;
 
     // Use this for initialization
@@ -30,7 +26,6 @@ public class BulletScript : MonoBehaviour {
         comboStall = false;
         rightThreshold = GameObject.Find("countMarker").GetComponent<Transform>();
         collided = false;
-        initialPosition = transform;
     }
 	
 	// Update is called once per frame
@@ -57,26 +52,10 @@ public class BulletScript : MonoBehaviour {
         {
             fishGameObject = collision.collider.gameObject;
             rotationFish = transform.rotation;
-            fishGameObject.GetComponent<Collider2D>().isTrigger = true;
             GetComponent<Collider2D>().isTrigger = true;
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, GetComponent<Rigidbody2D>().velocity.y * 10f));
-            totalGravity = calculateGravityScale(collision.transform) * gravityFactor;
-            /*if (collision.transform.position.x < 0 && collision.transform.position.y < 0)
-            {
-                totalGravity = Mathf.Clamp(totalGravity, 0, 10f);
-            } else if (collision.transform.position.x > 0 && collision.transform.position.y < 0)
-            {
-                totalGravity = Mathf.Clamp(totalGravity, 10f, 30f);
-            } else if (collision.transform.position.x < 0 && collision.transform.position.y > 0)
-            {
-                totalGravity = Mathf.Clamp(totalGravity, 5f, 10f);
-            } else
-            {
-                totalGravity = Mathf.Clamp(totalGravity, 25f, 50f);
-            }*/
-            
-            GetComponent<Rigidbody2D>().gravityScale = totalGravity;
-            Debug.Log(totalGravity);
+            fishGameObject.GetComponent<Collider2D>().isTrigger = true;
+            collisionPoint = collision.transform;
+            projectile();
             collided = true;
             moveWith = true;
             if (ComboScript.comboActive && comboStall)
@@ -116,14 +95,24 @@ public class BulletScript : MonoBehaviour {
         setXForGravity = posX;
     }
 
-    float calculateGravityScale(Transform collisionTransform)
+    void projectile()
     {
-        float xDis = rightThreshold.position.x - collisionTransform.position.x;
-        float yDis = collisionTransform.position.y - (-2.5f);
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
-        float gravityScale = gravityFactor * xDis * xDis * yDis * yDis;
+        float velY;
+        float velX;
+        if (collisionPoint.position.y >= 2f)
+        {
+            velY = 8f;
+            velX = 18f;
+        } else
+        {
+            velY = Mathf.Clamp(30f * (3.43f - collisionPoint.position.y), 8f, 15f);
+            velX = Mathf.Clamp(30f * (3.43f - collisionPoint.position.y), 18f, 18f);
+        }
 
-        return gravityScale / 100;
+        Debug.Log(velY);
+        rb.velocity = rb.velocity.normalized + new Vector2(velX, velY);
+        rb.gravityScale = 4f;
     }
-
 }

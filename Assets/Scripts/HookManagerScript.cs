@@ -6,6 +6,7 @@ public class HookManagerScript : MonoBehaviour
 {
     public int numberHooks;
     public int[] numberOfBaits;
+    public GameObject[] baits;
     public GameObject[] hooks;
 
     private bool[,] active;
@@ -18,6 +19,10 @@ public class HookManagerScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        for (int k = 0; k < numberOfBaits.Length; k++)
+        {
+            baits[k].GetComponent<BaitScript>().initialCount = numberOfBaits[k];
+        }
         active = new bool[numberHooks, 4];
         for (i = 0; i < numberHooks; i++)
         {
@@ -25,7 +30,6 @@ public class HookManagerScript : MonoBehaviour
             for (j = 0; j < 4; j++)
             {
                 active[i, j] = false;
-                Debug.Log(hooks[i].GetComponentInChildren<FishSpawnScript>().ToString());
                 hooks[i].GetComponentInChildren<FishSpawnScript>().activeBool[j] = false;
             }
         }

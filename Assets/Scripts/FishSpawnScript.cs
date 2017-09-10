@@ -126,7 +126,6 @@ public class FishSpawnScript : MonoBehaviour {
         Instantiate(shadow, spawnPosition, shadow.GetComponent<Transform>().rotation);
 
         yield return new WaitForSeconds(1);
-        Debug.Log((baitSpawnPoint.position.x - transform.position.x));
 
         if (spawnPosition.x <= baitSpawnPoint.position.x)
         {
@@ -161,7 +160,6 @@ public class FishSpawnScript : MonoBehaviour {
         Instantiate(shadow, spawnPosition, shadow.GetComponent<Transform>().rotation);
 
         yield return new WaitForSeconds(1);
-        Debug.Log((baitSpawnPoint.position.x - transform.position.x));
 
         if (spawnPosition.x <= baitSpawnPoint.position.x)
         {

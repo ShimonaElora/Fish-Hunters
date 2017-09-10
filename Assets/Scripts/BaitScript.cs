@@ -16,6 +16,10 @@ public class BaitScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         baitNumber.text = initialCount.ToString();
+        if (initialCount <= 0)
+        {
+            GetComponent<Collider2D>().enabled = false;
+        }
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)
