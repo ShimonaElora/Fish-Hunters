@@ -22,17 +22,12 @@ public class FishSpawnScript : MonoBehaviour {
 
     private int time;
 
-    public bool[] activeBool = new bool[4];
+    HookManagerScript hookManagerScript;
 
 	// Use this for initialization
 	void Start () {
-        activeBool = new bool[4];
+        hookManagerScript = GameObject.Find("Hook Hanger").GetComponent<HookManagerScript>();
         StartCoroutine(startWait());
-        transform.position = new Vector3 (baitSpawnPoint.position.x, transform.position.y, transform.position.z);
-        activeBool[0] = false;
-        activeBool[1] = false;
-        activeBool[2] = false;
-        activeBool[3] = false;
 	}
 	
 	// Update is called once per frame
@@ -42,28 +37,24 @@ public class FishSpawnScript : MonoBehaviour {
 
         if (!GameoverScript.gameover)
         {
-            if (startFirstBool && activeBool[0])
+            if (startFirstBool)
             {
                 startFirstBool = false;
-                activeBool[0] = false;
                 StartCoroutine(foreGroundFish());
             }
-            if (startSecondBool && activeBool[1])
+            if (startSecondBool)
             {
                 startSecondBool = false;
-                activeBool[0] = false;
                 StartCoroutine(midGroundFish());
             }
-            if (startThirdBool && activeBool[2])
+            if (startThirdBool)
             {
                 startThirdBool = false;
-                activeBool[0] = false;
                 StartCoroutine(backGroundFish());
             }
-            if (startFourthBool && activeBool[3])
+            if (startFourthBool)
             {
                 startFourthBool = false;
-                activeBool[0] = false;
                 StartCoroutine(extraFish());
             }
         }
@@ -71,9 +62,10 @@ public class FishSpawnScript : MonoBehaviour {
 
     IEnumerator startWait()
     {
+        yield return new WaitForSeconds(1);
         startFirstBool = true;
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(15);
         startSecondBool = true;
 
         yield return new WaitForSeconds(60);
@@ -88,12 +80,20 @@ public class FishSpawnScript : MonoBehaviour {
         time = Random.Range(2, 5);
         yield return new WaitForSeconds(time);
 
+        int index = Random.Range(0, hookManagerScript.numberHooks);
+        Fish = new GameObject[2] { hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2], hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2 + 1] };
+        spawnPoints = new Transform[2] {
+            hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("start").GetComponent<Transform>(),
+            hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("end").GetComponent<Transform>()
+        };
+        baitSpawnPoint = hookManagerScript.hooks[index].transform.Find("baitSpawnPoint").GetComponent<Transform>();
+
         Vector3 spawnPosition = new Vector3(Random.Range(spawnPoints[0].position.x, spawnPoints[1].position.x), spawnPoints[0].position.y, spawnPoints[0].position.z);
 
         Instantiate(shadow, spawnPosition, shadow.GetComponent<Transform>().rotation);
 
         yield return new WaitForSeconds(1);
-        Debug.Log((baitSpawnPoint.position.x - transform.position.x));
+
         if (spawnPosition.x <= baitSpawnPoint.position.x)
         {
             GameObject fish = (GameObject) Instantiate(Fish[1], spawnPosition, Fish[1].GetComponent<Transform>().rotation);
@@ -113,13 +113,20 @@ public class FishSpawnScript : MonoBehaviour {
         }
 
         startFirstBool = true;
-        HookManagerScript.nextFish = true;
     }
 
     IEnumerator midGroundFish()
     {
         time = Random.Range(3, 6);
         yield return new WaitForSeconds(time);
+
+        int index = Random.Range(0, hookManagerScript.numberHooks);
+        Fish = new GameObject[2] { hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2], hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2 + 1] };
+        spawnPoints = new Transform[2] {
+            hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("start").GetComponent<Transform>(),
+            hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("end").GetComponent<Transform>()
+        };
+        baitSpawnPoint = hookManagerScript.hooks[index].transform.Find("baitSpawnPoint").GetComponent<Transform>();
 
         Vector3 spawnPosition = new Vector3(Random.Range(spawnPoints[0].position.x, spawnPoints[1].position.x), spawnPoints[0].position.y, spawnPoints[0].position.z);
 
@@ -147,13 +154,20 @@ public class FishSpawnScript : MonoBehaviour {
         }
 
         startSecondBool = true;
-        HookManagerScript.nextFish = true;
     }
 
     IEnumerator backGroundFish()
     {
         time = Random.Range(4, 7);
         yield return new WaitForSeconds(time);
+
+        int index = Random.Range(0, hookManagerScript.numberHooks);
+        Fish = new GameObject[2] { hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2], hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2 + 1] };
+        spawnPoints = new Transform[2] {
+            hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("start").GetComponent<Transform>(),
+            hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("end").GetComponent<Transform>()
+        };
+        baitSpawnPoint = hookManagerScript.hooks[index].transform.Find("baitSpawnPoint").GetComponent<Transform>();
 
         Vector3 spawnPosition = new Vector3(Random.Range(spawnPoints[0].position.x, spawnPoints[1].position.x), spawnPoints[0].position.y, spawnPoints[0].position.z);
 
@@ -181,13 +195,20 @@ public class FishSpawnScript : MonoBehaviour {
         }
 
         startThirdBool = true;
-        HookManagerScript.nextFish = true;
     }
 
     IEnumerator extraFish()
     {
         time = Random.Range(5, 10);
         yield return new WaitForSeconds(time);
+
+        int index = Random.Range(0, hookManagerScript.numberHooks);
+        Fish = new GameObject[2] { hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2], hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2 + 1] };
+        spawnPoints = new Transform[2] {
+            hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("start").GetComponent<Transform>(),
+            hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("end").GetComponent<Transform>()
+        };
+        baitSpawnPoint = hookManagerScript.hooks[index].transform.Find("baitSpawnPoint").GetComponent<Transform>();
 
         Vector3 spawnPosition = new Vector3(Random.Range(spawnPoints[0].position.x, spawnPoints[1].position.x), spawnPoints[0].position.y, spawnPoints[0].position.z);
 
@@ -216,7 +237,6 @@ public class FishSpawnScript : MonoBehaviour {
         }
 
         startFourthBool = true;
-        HookManagerScript.nextFish = true;
     }
 
     float speedHorizontalMapper(Transform fishTransform)

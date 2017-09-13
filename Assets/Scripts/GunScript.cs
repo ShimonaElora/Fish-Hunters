@@ -33,39 +33,26 @@ public class GunScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        Debug.DrawLine(transform.position, rotationIndicator.position);
-
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !GameoverScript.gameover)
         {
             touch = Input.GetTouch(0);
             touchPos = Camera.main.ScreenToWorldPoint(touch.position);
+            touchPos.z = transform.position.z;
             touchPos.x = Mathf.Clamp(touchPos.x, -3.5f, touchPos.x);
             touchPos.y = Mathf.Clamp(touchPos.y, transform.position.y, touchPos.y);
 
             if (touchPos.x > transform.position.x)
             {
-                if (touchPos.y >= transform.position.y)
-                {
-                    restoreRotation = 1;
-                    reverse = 4f;
-                    rotateAngle = Mathf.Atan( (touchPos.y - transform.position.y)/(touchPos.x - transform.position.x) );
-                }
-                else
-                {
-                    restoreRotation = 2;
-                    reverse = 4f;
-                    rotateAngle = - Mathf.Atan((touchPos.y - transform.position.y) / (touchPos.x - transform.position.x));
-                }
-
-                float angle = Mathf.Atan2((touchPos.y - transform.position.y), (touchPos.x - transform.position.x)) * Mathf.Rad2Deg;
+                float angle = Mathf.Atan2((touchPos.y - transform.position.y), (touchPos.x - transform.position.x)) * 45f;
                 bulletRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+               
+                transform.Rotate(Vector3.forward, angle);
 
                 GameObject bullet = (GameObject)Instantiate(Bullet, bulletSpawnPoint.position, bulletRotation);
                 bullet.GetComponent<Rigidbody2D>().AddForce(
                     (touchPos - transform.position).normalized * speed, 
                     ForceMode2D.Force
                 );
-                bullet.GetComponent<BulletScript>().ParameterSetup(touchPos.x);
             }
         }
 
@@ -86,7 +73,7 @@ public class GunScript : MonoBehaviour {
         else if (restoreRotation == 1 && reverse > 0)
         {
             float angle = Quaternion.Angle(originalRotation, transform.rotation);
-            if (angle <= 82f)
+            if (angle <= 85f)
             {
                 transform.Rotate(Vector3.forward, rotateAngle * rotationFactor(new Ray2D(transform.position, rotationIndicator.position), touchPos));
             }
