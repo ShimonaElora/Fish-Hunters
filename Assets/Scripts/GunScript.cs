@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class GunScript : MonoBehaviour {
 
@@ -35,25 +35,33 @@ public class GunScript : MonoBehaviour {
 
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !GameoverScript.gameover)
         {
-            touch = Input.GetTouch(0);
-            touchPos = Camera.main.ScreenToWorldPoint(touch.position);
-            touchPos.z = transform.position.z;
-            touchPos.x = Mathf.Clamp(touchPos.x, -3.5f, touchPos.x);
-            touchPos.y = Mathf.Clamp(touchPos.y, transform.position.y, touchPos.y);
-
-            if (touchPos.x > transform.position.x)
+            if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
             {
-                float angle = Mathf.Atan2((touchPos.y - transform.position.y), (touchPos.x - transform.position.x)) * 45f;
-                bulletRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-               
-                transform.Rotate(Vector3.forward, angle);
-
-                GameObject bullet = (GameObject)Instantiate(Bullet, bulletSpawnPoint.position, bulletRotation);
-                bullet.GetComponent<Rigidbody2D>().AddForce(
-                    (touchPos - transform.position).normalized * speed, 
-                    ForceMode2D.Force
-                );
+                Debug.Log("Touched the UI");
             }
+            else
+            {
+                touch = Input.GetTouch(0);
+                touchPos = Camera.main.ScreenToWorldPoint(touch.position);
+                touchPos.z = transform.position.z;
+                touchPos.x = Mathf.Clamp(touchPos.x, -3.5f, touchPos.x);
+                touchPos.y = Mathf.Clamp(touchPos.y, transform.position.y, touchPos.y);
+
+                if (touchPos.x > transform.position.x)
+                {
+                    float angle = Mathf.Atan2((touchPos.y - transform.position.y), (touchPos.x - transform.position.x)) * 45f;
+                    bulletRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+                    transform.Rotate(Vector3.forward, angle);
+
+                    GameObject bullet = (GameObject)Instantiate(Bullet, bulletSpawnPoint.position, bulletRotation);
+                    bullet.GetComponent<Rigidbody2D>().AddForce(
+                        (touchPos - transform.position).normalized * speed,
+                        ForceMode2D.Force
+                    );
+                }
+            }
+            
         }
 
         if (reverse <= 1.2f)
