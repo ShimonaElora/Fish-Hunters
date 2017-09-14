@@ -7,6 +7,8 @@ public class GunScript : MonoBehaviour {
     public GameObject Bullet;
     public Transform bulletSpawnPoint;
     public Transform rotationIndicator;
+    public GameObject canonFire;
+    public Transform canonFireSpawnPoint;
 
     private Touch touch;
     private Vector3 touchPos;
@@ -37,9 +39,11 @@ public class GunScript : MonoBehaviour {
         {
             touch = Input.GetTouch(0);
             touchPos = Camera.main.ScreenToWorldPoint(touch.position);
-            if (touchPos.x >= -8 && touchPos.x <= -6.7 && touchPos.y >= -4.3 && touchPos.y <= -3.43)
+            if (touchPos.x >= -8 && touchPos.x <= -6.47 && touchPos.y >= -4.5 && touchPos.y <= -3.43)
             {
-                Debug.Log("touched Canon");
+                GameObject canonFireInstantiated = Instantiate(canonFire, canonFireSpawnPoint);
+                canonFireInstantiated.transform.SetParent(GameObject.Find("canon").transform, false);
+                canonFireInstantiated.GetComponent<Rigidbody2D>().AddForce(Vector3.right * 2000f, ForceMode2D.Force);
             }
             else
             {
