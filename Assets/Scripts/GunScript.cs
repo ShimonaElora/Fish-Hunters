@@ -35,14 +35,15 @@ public class GunScript : MonoBehaviour {
 
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !GameoverScript.gameover)
         {
-            if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+            touch = Input.GetTouch(0);
+            touchPos = Camera.main.ScreenToWorldPoint(touch.position);
+            if (touchPos.x >= -8 && touchPos.x <= -6.7 && touchPos.y >= -4.3 && touchPos.y <= -3.43)
             {
-                Debug.Log("Touched the UI");
+                Debug.Log("touched Canon");
             }
             else
             {
-                touch = Input.GetTouch(0);
-                touchPos = Camera.main.ScreenToWorldPoint(touch.position);
+                
                 touchPos.z = transform.position.z;
                 touchPos.x = Mathf.Clamp(touchPos.x, -3.5f, touchPos.x);
                 touchPos.y = Mathf.Clamp(touchPos.y, transform.position.y, touchPos.y);

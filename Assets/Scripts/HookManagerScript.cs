@@ -27,10 +27,4 @@ public class HookManagerScript : MonoBehaviour
             baitInstantiated[k].GetComponent<BaitScript>().baitNumber = count[k];
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

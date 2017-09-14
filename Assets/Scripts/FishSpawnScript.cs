@@ -81,35 +81,39 @@ public class FishSpawnScript : MonoBehaviour {
         yield return new WaitForSeconds(time);
 
         int index = Random.Range(0, hookManagerScript.numberHooks);
-        Fish = new GameObject[2] { hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2], hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2 + 1] };
-        spawnPoints = new Transform[2] {
-            hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("start").GetComponent<Transform>(),
-            hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("end").GetComponent<Transform>()
-        };
-        baitSpawnPoint = hookManagerScript.hooks[index].transform.Find("baitSpawnPoint").GetComponent<Transform>();
-
-        Vector3 spawnPosition = new Vector3(Random.Range(spawnPoints[0].position.x, spawnPoints[1].position.x), spawnPoints[0].position.y, spawnPoints[0].position.z);
-
-        Instantiate(shadow, spawnPosition, shadow.GetComponent<Transform>().rotation);
-
-        yield return new WaitForSeconds(1);
-
-        if (spawnPosition.x <= baitSpawnPoint.position.x)
+        if (hookManagerScript.baitInstantiated[index].GetComponent<BaitScript>().initialCount > 0)
         {
-            GameObject fish = (GameObject) Instantiate(Fish[1], spawnPosition, Fish[1].GetComponent<Transform>().rotation);
-            fish.GetComponent<Rigidbody2D>().AddForce(
-                new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical),
-                ForceMode2D.Force
-            );
-            fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
-        } else
-        {
-            GameObject fish = (GameObject)Instantiate(Fish[0], spawnPosition, Fish[0].GetComponent<Transform>().rotation);
-            fish.GetComponent<Rigidbody2D>().AddForce(
-                new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical),
-                ForceMode2D.Force
-            );
-            fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+            Fish = new GameObject[2] { hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2], hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2 + 1] };
+            spawnPoints = new Transform[2] {
+                hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("start").GetComponent<Transform>(),
+                hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("end").GetComponent<Transform>()
+            };
+            baitSpawnPoint = hookManagerScript.hooks[index].transform.Find("baitSpawnPoint").GetComponent<Transform>();
+
+            Vector3 spawnPosition = new Vector3(Random.Range(spawnPoints[0].position.x, spawnPoints[1].position.x), spawnPoints[0].position.y, spawnPoints[0].position.z);
+
+            Instantiate(shadow, spawnPosition, shadow.GetComponent<Transform>().rotation);
+
+            yield return new WaitForSeconds(1);
+
+            if (spawnPosition.x <= baitSpawnPoint.position.x)
+            {
+                GameObject fish = (GameObject)Instantiate(Fish[1], spawnPosition, Fish[1].GetComponent<Transform>().rotation);
+                fish.GetComponent<Rigidbody2D>().AddForce(
+                    new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical),
+                    ForceMode2D.Force
+                );
+                fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+            }
+            else
+            {
+                GameObject fish = (GameObject)Instantiate(Fish[0], spawnPosition, Fish[0].GetComponent<Transform>().rotation);
+                fish.GetComponent<Rigidbody2D>().AddForce(
+                    new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical),
+                    ForceMode2D.Force
+                );
+                fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+            }
         }
 
         startFirstBool = true;
@@ -121,36 +125,39 @@ public class FishSpawnScript : MonoBehaviour {
         yield return new WaitForSeconds(time);
 
         int index = Random.Range(0, hookManagerScript.numberHooks);
-        Fish = new GameObject[2] { hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2], hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2 + 1] };
-        spawnPoints = new Transform[2] {
+        if (hookManagerScript.baitInstantiated[index].GetComponent<BaitScript>().initialCount > 0)
+        {
+            Fish = new GameObject[2] { hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2], hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2 + 1] };
+            spawnPoints = new Transform[2] {
             hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("start").GetComponent<Transform>(),
             hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("end").GetComponent<Transform>()
         };
-        baitSpawnPoint = hookManagerScript.hooks[index].transform.Find("baitSpawnPoint").GetComponent<Transform>();
+            baitSpawnPoint = hookManagerScript.hooks[index].transform.Find("baitSpawnPoint").GetComponent<Transform>();
 
-        Vector3 spawnPosition = new Vector3(Random.Range(spawnPoints[0].position.x, spawnPoints[1].position.x), spawnPoints[0].position.y, spawnPoints[0].position.z);
+            Vector3 spawnPosition = new Vector3(Random.Range(spawnPoints[0].position.x, spawnPoints[1].position.x), spawnPoints[0].position.y, spawnPoints[0].position.z);
 
-        Instantiate(shadow, spawnPosition, shadow.GetComponent<Transform>().rotation);
+            Instantiate(shadow, spawnPosition, shadow.GetComponent<Transform>().rotation);
 
-        yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1);
 
-        if (spawnPosition.x <= baitSpawnPoint.position.x)
-        {
-            GameObject fish = (GameObject)Instantiate(Fish[1], spawnPosition, Fish[1].GetComponent<Transform>().rotation);
-            fish.GetComponent<Rigidbody2D>().AddForce(
-                new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical),
-                ForceMode2D.Force
-            );
-            fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
-        }
-        else
-        {
-            GameObject fish = (GameObject)Instantiate(Fish[0], spawnPosition, Fish[0].GetComponent<Transform>().rotation);
-            fish.GetComponent<Rigidbody2D>().AddForce(
-                new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical),
-                ForceMode2D.Force
-            );
-            fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+            if (spawnPosition.x <= baitSpawnPoint.position.x)
+            {
+                GameObject fish = (GameObject)Instantiate(Fish[1], spawnPosition, Fish[1].GetComponent<Transform>().rotation);
+                fish.GetComponent<Rigidbody2D>().AddForce(
+                    new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical),
+                    ForceMode2D.Force
+                );
+                fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+            }
+            else
+            {
+                GameObject fish = (GameObject)Instantiate(Fish[0], spawnPosition, Fish[0].GetComponent<Transform>().rotation);
+                fish.GetComponent<Rigidbody2D>().AddForce(
+                    new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical),
+                    ForceMode2D.Force
+                );
+                fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+            }
         }
 
         startSecondBool = true;
@@ -162,38 +169,40 @@ public class FishSpawnScript : MonoBehaviour {
         yield return new WaitForSeconds(time);
 
         int index = Random.Range(0, hookManagerScript.numberHooks);
-        Fish = new GameObject[2] { hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2], hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2 + 1] };
-        spawnPoints = new Transform[2] {
-            hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("start").GetComponent<Transform>(),
-            hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("end").GetComponent<Transform>()
-        };
-        baitSpawnPoint = hookManagerScript.hooks[index].transform.Find("baitSpawnPoint").GetComponent<Transform>();
-
-        Vector3 spawnPosition = new Vector3(Random.Range(spawnPoints[0].position.x, spawnPoints[1].position.x), spawnPoints[0].position.y, spawnPoints[0].position.z);
-
-        Instantiate(shadow, spawnPosition, shadow.GetComponent<Transform>().rotation);
-
-        yield return new WaitForSeconds(1);
-
-        if (spawnPosition.x <= baitSpawnPoint.position.x)
+        if (hookManagerScript.baitInstantiated[index].GetComponent<BaitScript>().initialCount > 0)
         {
-            GameObject fish = (GameObject)Instantiate(Fish[1], spawnPosition, Fish[1].GetComponent<Transform>().rotation);
-            fish.GetComponent<Rigidbody2D>().AddForce(
-                new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical),
-                ForceMode2D.Force
-            );
-            fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
-        }
-        else
-        {
-            GameObject fish = (GameObject)Instantiate(Fish[0], spawnPosition, Fish[0].GetComponent<Transform>().rotation);
-            fish.GetComponent<Rigidbody2D>().AddForce(
-                new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical),
-                ForceMode2D.Force
-            );
-            fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
-        }
+            Fish = new GameObject[2] { hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2], hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2 + 1] };
+            spawnPoints = new Transform[2] {
+                hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("start").GetComponent<Transform>(),
+                hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("end").GetComponent<Transform>()
+            };
+            baitSpawnPoint = hookManagerScript.hooks[index].transform.Find("baitSpawnPoint").GetComponent<Transform>();
 
+            Vector3 spawnPosition = new Vector3(Random.Range(spawnPoints[0].position.x, spawnPoints[1].position.x), spawnPoints[0].position.y, spawnPoints[0].position.z);
+
+            Instantiate(shadow, spawnPosition, shadow.GetComponent<Transform>().rotation);
+
+            yield return new WaitForSeconds(1);
+
+            if (spawnPosition.x <= baitSpawnPoint.position.x)
+            {
+                GameObject fish = (GameObject)Instantiate(Fish[1], spawnPosition, Fish[1].GetComponent<Transform>().rotation);
+                fish.GetComponent<Rigidbody2D>().AddForce(
+                    new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical),
+                    ForceMode2D.Force
+                );
+                fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+            }
+            else
+            {
+                GameObject fish = (GameObject)Instantiate(Fish[0], spawnPosition, Fish[0].GetComponent<Transform>().rotation);
+                fish.GetComponent<Rigidbody2D>().AddForce(
+                    new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical),
+                    ForceMode2D.Force
+                );
+                fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+            }
+        }
         startThirdBool = true;
     }
 
@@ -203,39 +212,41 @@ public class FishSpawnScript : MonoBehaviour {
         yield return new WaitForSeconds(time);
 
         int index = Random.Range(0, hookManagerScript.numberHooks);
-        Fish = new GameObject[2] { hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2], hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2 + 1] };
-        spawnPoints = new Transform[2] {
-            hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("start").GetComponent<Transform>(),
-            hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("end").GetComponent<Transform>()
-        };
-        baitSpawnPoint = hookManagerScript.hooks[index].transform.Find("baitSpawnPoint").GetComponent<Transform>();
-
-        Vector3 spawnPosition = new Vector3(Random.Range(spawnPoints[0].position.x, spawnPoints[1].position.x), spawnPoints[0].position.y, spawnPoints[0].position.z);
-
-        Instantiate(shadow, spawnPosition, shadow.GetComponent<Transform>().rotation);
-
-        yield return new WaitForSeconds(1);
-        Debug.Log((baitSpawnPoint.position.x - transform.position.x));
-
-        if (spawnPosition.x <= baitSpawnPoint.position.x)
+        if (hookManagerScript.baitInstantiated[index].GetComponent<BaitScript>().initialCount > 0)
         {
-            GameObject fish = (GameObject)Instantiate(Fish[1], spawnPosition, Fish[1].GetComponent<Transform>().rotation);
-            fish.GetComponent<Rigidbody2D>().AddForce(
-                new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical),
-                ForceMode2D.Force
-            );
-            fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
-        }
-        else
-        {
-            GameObject fish = (GameObject)Instantiate(Fish[0], spawnPosition, Fish[0].GetComponent<Transform>().rotation);
-            fish.GetComponent<Rigidbody2D>().AddForce(
-                new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical),
-                ForceMode2D.Force
-            );
-            fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
-        }
+            Fish = new GameObject[2] { hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2], hookManagerScript.fishes[(hookManagerScript.baitOrder[index] - 1) * 2 + 1] };
+            spawnPoints = new Transform[2] {
+                hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("start").GetComponent<Transform>(),
+                hookManagerScript.hooks[index].transform.Find("Fish Spawn Points").transform.Find("end").GetComponent<Transform>()
+            };
+            baitSpawnPoint = hookManagerScript.hooks[index].transform.Find("baitSpawnPoint").GetComponent<Transform>();
 
+            Vector3 spawnPosition = new Vector3(Random.Range(spawnPoints[0].position.x, spawnPoints[1].position.x), spawnPoints[0].position.y, spawnPoints[0].position.z);
+
+            Instantiate(shadow, spawnPosition, shadow.GetComponent<Transform>().rotation);
+
+            yield return new WaitForSeconds(1);
+            Debug.Log((baitSpawnPoint.position.x - transform.position.x));
+
+            if (spawnPosition.x <= baitSpawnPoint.position.x)
+            {
+                GameObject fish = (GameObject)Instantiate(Fish[1], spawnPosition, Fish[1].GetComponent<Transform>().rotation);
+                fish.GetComponent<Rigidbody2D>().AddForce(
+                    new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical),
+                    ForceMode2D.Force
+                );
+                fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+            }
+            else
+            {
+                GameObject fish = (GameObject)Instantiate(Fish[0], spawnPosition, Fish[0].GetComponent<Transform>().rotation);
+                fish.GetComponent<Rigidbody2D>().AddForce(
+                    new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical),
+                    ForceMode2D.Force
+                );
+                fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+            }
+        }
         startFourthBool = true;
     }
 
