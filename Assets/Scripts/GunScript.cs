@@ -1,12 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class GunScript : MonoBehaviour {
 
     public GameObject Bullet;
     public Transform bulletSpawnPoint;
     public Transform rotationIndicator;
+    public GameObject canonFire;
+    public Transform canonFireSpawnPoint;
 
     private Touch touch;
     private Vector3 touchPos;
@@ -33,40 +35,38 @@ public class GunScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        Debug.DrawLine(transform.position, rotationIndicator.position);
-
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !GameoverScript.gameover)
         {
             touch = Input.GetTouch(0);
             touchPos = Camera.main.ScreenToWorldPoint(touch.position);
-            touchPos.x = Mathf.Clamp(touchPos.x, -3.5f, touchPos.x);
-            touchPos.y = Mathf.Clamp(touchPos.y, transform.position.y, touchPos.y);
-
-            if (touchPos.x > transform.position.x)
+            if (touchPos.x >= -8 && touchPos.x <= -6.47 && touchPos.y >= -4.5 && touchPos.y <= -3.43)
             {
-                if (touchPos.y >= transform.position.y)
-                {
-                    restoreRotation = 1;
-                    reverse = 4f;
-                    rotateAngle = Mathf.Atan( (touchPos.y - transform.position.y)/(touchPos.x - transform.position.x) );
-                }
-                else
-                {
-                    restoreRotation = 2;
-                    reverse = 4f;
-                    rotateAngle = - Mathf.Atan((touchPos.y - transform.position.y) / (touchPos.x - transform.position.x));
-                }
-
-                float angle = Mathf.Atan2((touchPos.y - transform.position.y), (touchPos.x - transform.position.x)) * Mathf.Rad2Deg;
-                bulletRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-                GameObject bullet = (GameObject)Instantiate(Bullet, bulletSpawnPoint.position, bulletRotation);
-                bullet.GetComponent<Rigidbody2D>().AddForce(
-                    (touchPos - transform.position).normalized * speed, 
-                    ForceMode2D.Force
-                );
-                bullet.GetComponent<BulletScript>().ParameterSetup(touchPos.x);
+                GameObject canonFireInstantiated = Instantiate(canonFire, canonFireSpawnPoint);
+                canonFireInstantiated.transform.SetParent(GameObject.Find("canon").transform, false);
+                canonFireInstantiated.GetComponent<Rigidbody2D>().AddForce(Vector3.right * 2000f, ForceMode2D.Force);
             }
+            else
+            {
+                
+                touchPos.z = transform.position.z;
+                touchPos.x = Mathf.Clamp(touchPos.x, -3.5f, touchPos.x);
+                touchPos.y = Mathf.Clamp(touchPos.y, transform.position.y, touchPos.y);
+
+                if (touchPos.x > transform.position.x)
+                {
+                    float angle = Mathf.Atan2((touchPos.y - transform.position.y), (touchPos.x - transform.position.x)) * 45f;
+                    bulletRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+                    transform.Rotate(Vector3.forward, angle);
+
+                    GameObject bullet = (GameObject)Instantiate(Bullet, bulletSpawnPoint.position, bulletRotation);
+                    bullet.GetComponent<Rigidbody2D>().AddForce(
+                        (touchPos - transform.position).normalized * speed,
+                        ForceMode2D.Force
+                    );
+                }
+            }
+            
         }
 
         if (reverse <= 1.2f)
@@ -86,7 +86,7 @@ public class GunScript : MonoBehaviour {
         else if (restoreRotation == 1 && reverse > 0)
         {
             float angle = Quaternion.Angle(originalRotation, transform.rotation);
-            if (angle <= 82f)
+            if (angle <= 85f)
             {
                 transform.Rotate(Vector3.forward, rotateAngle * rotationFactor(new Ray2D(transform.position, rotationIndicator.position), touchPos));
             }

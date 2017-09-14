@@ -37,7 +37,7 @@ public class IslandAndCloudScrollManagerScript : MonoBehaviour {
             GameObject cloud = clouds[Random.Range(0, 3)];
 
             GameObject cloudInstantiated = Instantiate(cloud, cloudPosition);
-            cloudInstantiated.GetComponent<CloudScrollScript>().speed = speed;
+            cloudInstantiated.GetComponent<CloudScrollScript>().speed = speed / 2;
             cloudInstantiated.transform.parent = GameObject.Find("Islands and Clouds").transform;
 
             yield return new WaitForSeconds(Random.Range(2, 7));

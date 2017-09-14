@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FishScript : MonoBehaviour {
-
-    Transform baitSpawnPoint;
-    Vector3 distance;
+    
     public bool touchedBait = false;
     public GameObject bait;
     public bool collided = false;
+    public bool inverted;
+    bool countMarkerTouched = false;
 
 	// Use this for initialization
 	void Start () {
@@ -23,16 +23,12 @@ public class FishScript : MonoBehaviour {
         }
         if (touchedBait)
         {
-            for (int i = 0; i < GameObject.Find("Mast, Hooks and Bait").GetComponent<HookManagerScript>().numberHooks; i++)
-            {
-                Physics2D.IgnoreCollision(GetComponent<Collider2D>(), GameObject.FindGameObjectsWithTag("bait")[i].GetComponent<Collider2D>());
-            }
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), GameObject.FindGameObjectWithTag("bait").GetComponent<Collider2D>());
         }
-    }
-
-    private void FixedUpdate()
-    {
-        
+        if (countMarkerTouched)
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), GameObject.Find("countMarker").GetComponent<Collider2D>());
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -40,6 +36,11 @@ public class FishScript : MonoBehaviour {
         if (collision.collider.tag == "bullet")
         {
             collided = true;
+        }
+
+        if (collision.collider.gameObject.name == "countMarker")
+        {
+            countMarkerTouched = true;
         }
     }
 
