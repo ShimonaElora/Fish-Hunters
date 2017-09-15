@@ -41,9 +41,11 @@ public class FishScript : MonoBehaviour {
                 if (inverted)
                 {
                     if (transform.rotation.z >= 0f) text.text = "Critical Catch";
+                    else text.text = "Early Catch";
                 } else
                 {
                     if (transform.rotation.z >= 0f) text.text = "Early Catch";
+                    else text.text = "Critical Catch";
                 }
             }
         }

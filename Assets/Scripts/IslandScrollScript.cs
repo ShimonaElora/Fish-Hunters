@@ -18,5 +18,10 @@ public class IslandScrollScript : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+
+        if (GameoverScript.gameover && speed >= 0f)
+        {
+            speed -= 0.005f;
+        }
 	}
 }

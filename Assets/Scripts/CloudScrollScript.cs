@@ -20,5 +20,10 @@ public class CloudScrollScript : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+
+        if (GameoverScript.gameover && speed >= 0f)
+        {
+            speed -= 0.005f;
+        }
     }
 }

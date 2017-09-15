@@ -20,15 +20,9 @@ public class IslandAndCloudScrollManagerScript : MonoBehaviour {
         GameObject.Find("water").GetComponent<WaterScrollerScript>().scrollSpeed = speed * 0.6f / 10;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     IEnumerator cloudGenerator()
     {
-        while (true)
+        while (!GameoverScript.gameover)
         {
             float yPos = Random.Range(cloudSpawnPointRange[0].position.y, cloudSpawnPointRange[1].position.y);
             Transform cloudPosition = cloudSpawnPointRange[2];
@@ -46,7 +40,7 @@ public class IslandAndCloudScrollManagerScript : MonoBehaviour {
 
     IEnumerator islandGenerator()
     {
-        while (true)
+        while (!GameoverScript.gameover)
         {
             GameObject island = islands[Random.Range(0, 3)];
 
