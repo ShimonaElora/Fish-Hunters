@@ -1,11 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class FishSpawnScript : MonoBehaviour {
 
     public Transform[] spawnPoints;
     public GameObject shadow;
+    public Text text;
 
     public Transform baitSpawnPoint;
 
@@ -104,6 +106,7 @@ public class FishSpawnScript : MonoBehaviour {
                     ForceMode2D.Force
                 );
                 fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                fish.GetComponent<FishScript>().text = text;
             }
             else
             {
@@ -113,6 +116,7 @@ public class FishSpawnScript : MonoBehaviour {
                     ForceMode2D.Force
                 );
                 fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                fish.GetComponent<FishScript>().text = text;
             }
         }
 
@@ -148,6 +152,7 @@ public class FishSpawnScript : MonoBehaviour {
                     ForceMode2D.Force
                 );
                 fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                fish.GetComponent<FishScript>().text = text;
             }
             else
             {
@@ -157,6 +162,7 @@ public class FishSpawnScript : MonoBehaviour {
                     ForceMode2D.Force
                 );
                 fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                fish.GetComponent<FishScript>().text = text;
             }
         }
 
@@ -192,6 +198,7 @@ public class FishSpawnScript : MonoBehaviour {
                     ForceMode2D.Force
                 );
                 fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                fish.GetComponent<FishScript>().text = text;
             }
             else
             {
@@ -201,6 +208,7 @@ public class FishSpawnScript : MonoBehaviour {
                     ForceMode2D.Force
                 );
                 fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                fish.GetComponent<FishScript>().text = text;
             }
         }
         startThirdBool = true;
@@ -236,6 +244,7 @@ public class FishSpawnScript : MonoBehaviour {
                     ForceMode2D.Force
                 );
                 fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                fish.GetComponent<FishScript>().text = text;
             }
             else
             {
@@ -245,6 +254,7 @@ public class FishSpawnScript : MonoBehaviour {
                     ForceMode2D.Force
                 );
                 fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                fish.GetComponent<FishScript>().text = text;
             }
         }
         startFourthBool = true;

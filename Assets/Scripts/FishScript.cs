@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class FishScript : MonoBehaviour {
     
@@ -8,6 +7,7 @@ public class FishScript : MonoBehaviour {
     public GameObject bait;
     public bool collided = false;
     public bool inverted;
+    public Text text;
     bool countMarkerTouched = false;
 
 	// Use this for initialization
@@ -36,6 +36,16 @@ public class FishScript : MonoBehaviour {
         if (collision.collider.tag == "bullet")
         {
             collided = true;
+            if (transform.position.y <= -1.5f)
+            {
+                if (inverted)
+                {
+                    if (transform.rotation.z >= 0f) text.text = "Critical Catch";
+                } else
+                {
+                    if (transform.rotation.z >= 0f) text.text = "Early Catch";
+                }
+            }
         }
 
         if (collision.collider.gameObject.name == "countMarker")

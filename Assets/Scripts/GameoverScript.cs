@@ -60,11 +60,9 @@ public class GameoverScript : MonoBehaviour {
                 checker = checker * 10;
             }
         }
-        Debug.Log(checker);
 
         if (checker == check)
         {
-            Debug.Log("here");
             gameover = true;
         } else
         {
