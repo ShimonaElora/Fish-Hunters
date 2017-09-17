@@ -17,7 +17,10 @@ public class RockSpawnScript : MonoBehaviour {
 
         while (!GameoverScript.gameover)
         {
-            Instantiate(rocks[Random.Range(0, 7)], transform);
+            if (BaitSelectionScript.hasStarted)
+            {
+                //Instantiate(rocks[Random.Range(0, 7)], transform);
+            }
 
             yield return new WaitForSeconds(Random.Range(20, 30));
         }

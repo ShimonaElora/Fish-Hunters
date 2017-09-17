@@ -15,7 +15,7 @@ public class ColorChanger : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(material.color);
+        /*Debug.Log(material.color);
         r = material.color.r;
         g = material.color.g;
         b = material.color.b;
@@ -25,6 +25,6 @@ public class ColorChanger : MonoBehaviour {
         r = Mathf.Clamp((float)r, 0.5f, 1f);
         g = Mathf.Clamp((float)g, 0.5f, 1f);
         b = Mathf.Clamp((float)b, 0.5f, 1f);
-        material.color = new Color(r, g, b, material.color.a);
+        material.color = new Color(r, g, b, material.color.a);*/
 	}
 }

@@ -35,21 +35,24 @@ public class CrabScript : MonoBehaviour {
 
         while (!GameoverScript.gameover)
         {
-            float xPos = Random.Range(spawnPoints[0].position.x, spawnPoints[1].position.x);
-            Vector3 spawnPosition = new Vector3(Random.Range(spawnPoints[0].position.x, spawnPoints[1].position.x), spawnPoints[0].position.y, spawnPoints[0].position.z);
+            if (BaitSelectionScript.hasStarted)
+            {
+                float xPos = Random.Range(spawnPoints[0].position.x, spawnPoints[1].position.x);
+                Vector3 spawnPosition = new Vector3(Random.Range(spawnPoints[0].position.x, spawnPoints[1].position.x), spawnPoints[0].position.y, spawnPoints[0].position.z);
 
-            int index = Random.Range(0, hookManagerScript.numberHooks);
+                int index = Random.Range(0, hookManagerScript.numberHooks);
 
-            Instantiate(shadow, spawnPosition, shadow.GetComponent<Transform>().rotation);
+                Instantiate(shadow, spawnPosition, shadow.GetComponent<Transform>().rotation);
 
-            yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(1);
 
-            GameObject crabInstantiated = (GameObject)Instantiate(crabList[index], spawnPosition, crabList[index].GetComponent<Transform>().rotation);
-            crabInstantiated.transform.SetParent(transform, false);
-            crabInstantiated.GetComponent<Rigidbody2D>().AddForce(
-                new Vector2(speedHorizontalMapper(crabInstantiated.transform), 2.6f * speedVertical),
-                ForceMode2D.Force
-            );
+                GameObject crabInstantiated = (GameObject)Instantiate(crabList[index], spawnPosition, crabList[index].GetComponent<Transform>().rotation);
+                crabInstantiated.transform.SetParent(transform, false);
+                crabInstantiated.GetComponent<Rigidbody2D>().AddForce(
+                    new Vector2(speedHorizontalMapper(crabInstantiated.transform), 2.6f * speedVertical),
+                    ForceMode2D.Force
+                );
+            }
 
             yield return new WaitForSeconds(Random.Range(2, 3));
         }

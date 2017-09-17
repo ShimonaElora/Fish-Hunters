@@ -13,8 +13,8 @@ public class IslandScrollScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position = new Vector3(transform.position.x + Time.deltaTime * -speed, transform.position.y);
-        if (transform.position.x <= -11.6f)
+        transform.position = new Vector3(transform.position.x + Time.deltaTime * speed, transform.position.y);
+        if (transform.position.x >= 11.6f)
         {
             Destroy(gameObject);
         }

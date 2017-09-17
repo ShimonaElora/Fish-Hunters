@@ -11,6 +11,10 @@ public class DestroyerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (BaitSelectionScript.hasStarted)
+        {
+            gameObject.SetActive(true);
+        }
 		
 	}
 

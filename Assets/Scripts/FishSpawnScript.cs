@@ -37,7 +37,7 @@ public class FishSpawnScript : MonoBehaviour {
 
         //speedVertical = 500 * (3 + gravityScale) / 6f;
 
-        if (!GameoverScript.gameover)
+        if (!GameoverScript.gameover && BaitSelectionScript.hasStarted)
         {
             if (startFirstBool)
             {

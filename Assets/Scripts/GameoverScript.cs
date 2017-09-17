@@ -13,6 +13,10 @@ public class GameoverScript : MonoBehaviour {
     int check, checker;
     int baitsActive;
     HookManagerScript hookManagerScript;
+    public GameObject hookSelectionView;
+    public GameObject baitSelectionView;
+    public GameObject selectionOverlay;
+    public GameObject startButton;
 
 	// Use this for initialization
 	void Start () {
@@ -64,11 +68,12 @@ public class GameoverScript : MonoBehaviour {
         if (checker == check)
         {
             gameover = true;
+            BaitSelectionScript.hasStarted = false;
         } else
         {
             checker = 0;
         }
-        if (gameover)
+        if (gameover && BaitSelectionScript.hasStarted)
         {
             Gameover.SetActive(true);
         }
@@ -76,6 +81,11 @@ public class GameoverScript : MonoBehaviour {
 
     void replayClicked()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("here");
+        gameover = false;
+        hookSelectionView.SetActive(true);
+        baitSelectionView.SetActive(true);
+        selectionOverlay.SetActive(true);
+        startButton.SetActive(true);
     }
 }

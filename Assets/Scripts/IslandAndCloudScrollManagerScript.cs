@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class IslandAndCloudScrollManagerScript : MonoBehaviour {
 
-    public GameObject[] islands;
-    public GameObject[] clouds;
+    public Sprite[] islands;
+    public Sprite[] clouds;
+    public GameObject cloud;
+    public GameObject backLayerObject;
+    public Sprite[] backLayerObjects;
+    int previousBackLayer;
 
     public Transform[] cloudSpawnPointRange;
-    public Transform islandSpawnPoint;
+    public Transform backLayerSpawnPoint;
 
     public float speed;
+
+    public Transform spawnPointBack;
+    public Transform spawnPointMid;
+    public Transform spawnPointFront;
 
     // Use this for initialization
     void Start()
@@ -18,37 +26,88 @@ public class IslandAndCloudScrollManagerScript : MonoBehaviour {
         StartCoroutine(cloudGenerator());
         StartCoroutine(islandGenerator());
         GameObject.Find("water").GetComponent<WaterScrollerScript>().scrollSpeed = speed * 0.6f / 10;
+        previousBackLayer = -1;
     }
 
     IEnumerator cloudGenerator()
     {
         while (!GameoverScript.gameover)
         {
-            float yPos = Random.Range(cloudSpawnPointRange[0].position.y, cloudSpawnPointRange[1].position.y);
-            Transform cloudPosition = cloudSpawnPointRange[2];
-            cloudPosition.position = new Vector3(cloudSpawnPointRange[2].position.x, yPos);
+            if (BaitSelectionScript.hasStarted)
+            {
+                float yPos = Random.Range(cloudSpawnPointRange[0].position.y, cloudSpawnPointRange[1].position.y);
+                Transform cloudPosition = cloudSpawnPointRange[2];
+                cloudPosition.position = new Vector3(cloudSpawnPointRange[2].position.x, yPos);
 
-            GameObject cloud = clouds[Random.Range(0, 3)];
+                cloud.GetComponent<SpriteRenderer>().sprite = clouds[Random.Range(0, 8)];
 
-            GameObject cloudInstantiated = Instantiate(cloud, cloudPosition);
-            cloudInstantiated.GetComponent<CloudScrollScript>().speed = speed / 2;
-            cloudInstantiated.transform.parent = GameObject.Find("Islands and Clouds").transform;
+                GameObject cloudInstantiated = Instantiate(cloud, cloudPosition);
+                cloudInstantiated.GetComponent<CloudScrollScript>().speed = speed / 5;
+                cloudInstantiated.transform.parent = GameObject.Find("Islands and Clouds").transform;
+            }
 
-            yield return new WaitForSeconds(Random.Range(2, 7));
+            yield return new WaitForSeconds(Random.Range(10, 15));
         }
     }
 
     IEnumerator islandGenerator()
     {
+        yield return new WaitForSeconds(Random.Range(20, 30));
+
         while (!GameoverScript.gameover)
         {
-            GameObject island = islands[Random.Range(0, 3)];
+            if (BaitSelectionScript.hasStarted)
+            {
+                int backLayerNumber;
+                if (previousBackLayer == -1)
+                {
+                    backLayerNumber = Random.Range(0, 3);
+                } else
+                {
+                    if (previousBackLayer == 0)
+                    {
+                        backLayerNumber = Random.Range(1, 3);
+                    } else if (previousBackLayer == 1)
+                    {
+                        if ((int)Random.Range(0, 2) == 0)
+                        {
+                            backLayerNumber = 0;
+                        } else
+                        {
+                            backLayerNumber = 2;
+                        }
+                    } else
+                    {
+                        backLayerNumber = Random.Range(0, 2);
+                    }
+                }
+                backLayerObject.GetComponent<SpriteRenderer>().sprite = backLayerObjects[backLayerNumber];
+                previousBackLayer = backLayerNumber;
+                Vector3 backObjectPosition;
+                if (backLayerNumber == 0)
+                {
+                    backObjectPosition = new Vector3(backLayerSpawnPoint.position.x, backLayerSpawnPoint.position.y - 2.31f, backLayerSpawnPoint.position.z);
+                } else if (backLayerNumber == 1)
+                {
+                    backObjectPosition = new Vector3(backLayerSpawnPoint.position.x, backLayerSpawnPoint.position.y - 2f, backLayerSpawnPoint.position.z);
+                } else
+                {
+                    backObjectPosition = new Vector3(backLayerSpawnPoint.position.x, backLayerSpawnPoint.position.y - 1.96f, backLayerSpawnPoint.position.z);
+                }
 
-            GameObject islandInstantiated = Instantiate(island, islandSpawnPoint);
-            islandInstantiated.GetComponent<IslandScrollScript>().speed = speed;
-            islandInstantiated.transform.parent = GameObject.Find("islandSpawnPoint").transform;
+                GameObject backLayerObjectInstantiated = Instantiate(backLayerObject, backObjectPosition, backLayerSpawnPoint.rotation);
+                
+                backLayerObjectInstantiated.GetComponent<AreaBackLayerScript>().speed = speed / 8;
+                backLayerObjectInstantiated.transform.parent = GameObject.Find("backAreaSpawnPoint").transform;
+                backLayerObjectInstantiated.GetComponent<AreaBackLayerScript>().type = backLayerNumber;
+                backLayerObjectInstantiated.GetComponent<AreaBackLayerScript>().spawnPointBack = spawnPointBack;
+                backLayerObjectInstantiated.GetComponent<AreaBackLayerScript>().spawnPointMid = spawnPointMid;
+                backLayerObjectInstantiated.GetComponent<AreaBackLayerScript>().spawnPointFront = spawnPointFront;
 
-            yield return new WaitForSeconds(Random.Range(5, 10));
+                yield return new WaitForSeconds(Random.Range(60, 150));
+            }
+
+            yield return new WaitForSeconds(Random.Range(1, 2));
         }
     }
 }
