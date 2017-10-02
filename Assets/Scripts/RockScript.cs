@@ -28,7 +28,7 @@ public class RockScript : MonoBehaviour {
         }
         else if (collision.GetComponent<Collider2D>().gameObject.name == "Boat")
         {
-            GameoverScript.gameover = true;
+            //GameoverScript.gameover = true;
         }
     }
 }

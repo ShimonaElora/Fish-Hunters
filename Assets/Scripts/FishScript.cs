@@ -13,6 +13,7 @@ public class FishScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         touchedBait = false;
+        GetComponent<Collider2D>().enabled = false;
     }
 	
 	// Update is called once per frame

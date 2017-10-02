@@ -42,16 +42,27 @@ public class CrabScript : MonoBehaviour {
 
                 int index = Random.Range(0, hookManagerScript.numberHooks);
 
-                Instantiate(shadow, spawnPosition, shadow.GetComponent<Transform>().rotation);
+                if (hookManagerScript.baitInstantiated[index].GetComponent<BaitScript>().initialCount >= 0)
+                {
+                    GameObject crabInstantiated = (GameObject)Instantiate(crabList[index], spawnPosition, crabList[index].GetComponent<Transform>().rotation);
+                    crabInstantiated.transform.SetParent(transform, false);
 
-                yield return new WaitForSeconds(1);
+                    if (spawnPosition.x <= 0)
+                    {
+                        crabInstantiated.GetComponent<Rigidbody2D>().AddForce(
+                            new Vector2(speedHorizontalMapper(crabInstantiated.transform), 2.6f * speedVertical),
+                            ForceMode2D.Force
+                        );
+                    }
+                    else
+                    {
+                        crabInstantiated.GetComponent<Rigidbody2D>().AddForce(
+                            new Vector2(speedHorizontalMapper(crabInstantiated.transform) * -1f, 2.6f * speedVertical),
+                            ForceMode2D.Force
+                        );
+                    }
+                }
 
-                GameObject crabInstantiated = (GameObject)Instantiate(crabList[index], spawnPosition, crabList[index].GetComponent<Transform>().rotation);
-                crabInstantiated.transform.SetParent(transform, false);
-                crabInstantiated.GetComponent<Rigidbody2D>().AddForce(
-                    new Vector2(speedHorizontalMapper(crabInstantiated.transform), 2.6f * speedVertical),
-                    ForceMode2D.Force
-                );
             }
 
             yield return new WaitForSeconds(Random.Range(2, 3));

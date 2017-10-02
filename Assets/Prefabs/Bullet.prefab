@@ -90,11 +90,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishDeadSprite:
-  - {fileID: 21300028, guid: 9f63112455e198144af09689b56fa93c, type: 3}
   - {fileID: 21300020, guid: 9f63112455e198144af09689b56fa93c, type: 3}
   - {fileID: 21300022, guid: 9f63112455e198144af09689b56fa93c, type: 3}
   - {fileID: 21300024, guid: 9f63112455e198144af09689b56fa93c, type: 3}
   - {fileID: 21300026, guid: 9f63112455e198144af09689b56fa93c, type: 3}
+  - {fileID: 21300028, guid: 9f63112455e198144af09689b56fa93c, type: 3}
 --- !u!212 &212062442217308290
 SpriteRenderer:
   m_ObjectHideFlags: 1

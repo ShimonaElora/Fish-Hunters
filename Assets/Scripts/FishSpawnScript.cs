@@ -101,21 +101,59 @@ public class FishSpawnScript : MonoBehaviour {
             if (spawnPosition.x <= baitSpawnPoint.position.x)
             {
                 GameObject fish = (GameObject)Instantiate(Fish[1], spawnPosition, Fish[1].GetComponent<Transform>().rotation);
-                fish.GetComponent<Rigidbody2D>().AddForce(
-                    new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical),
-                    ForceMode2D.Force
-                );
-                fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                if (fish.gameObject.name == "Fish1L(Clone)" || fish.gameObject.name == "Fish1R(Clone)" || fish.gameObject.name == "Fish2L(Clone)" || fish.gameObject.name == "Fish2R(Clone)")
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical * 1.22f),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale * 1.3f * 1.3f;
+                }
+                else if (fish.gameObject.name == "Fish3L(Clone)" || fish.gameObject.name == "Fish3R(Clone)")
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical * 1.15f),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale * 1.2f * 1.2f;
+                }
+                else
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                }
                 fish.GetComponent<FishScript>().text = text;
             }
             else
             {
                 GameObject fish = (GameObject)Instantiate(Fish[0], spawnPosition, Fish[0].GetComponent<Transform>().rotation);
-                fish.GetComponent<Rigidbody2D>().AddForce(
-                    new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical),
-                    ForceMode2D.Force
-                );
-                fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                if (fish.gameObject.name == "Fish1L(Clone)" || fish.gameObject.name == "Fish1R(Clone)" || fish.gameObject.name == "Fish2L(Clone)" || fish.gameObject.name == "Fish2R(Clone)")
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical * 1.22f),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale * 1.3f * 1.3f;
+                }
+                else if (fish.gameObject.name == "Fish3L(Clone)" || fish.gameObject.name == "Fish3R(Clone)")
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical * 1.15f),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale * 1.2f * 1.2f;
+                }
+                else
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                }
                 fish.GetComponent<FishScript>().text = text;
             }
         }
@@ -147,21 +185,59 @@ public class FishSpawnScript : MonoBehaviour {
             if (spawnPosition.x <= baitSpawnPoint.position.x)
             {
                 GameObject fish = (GameObject)Instantiate(Fish[1], spawnPosition, Fish[1].GetComponent<Transform>().rotation);
-                fish.GetComponent<Rigidbody2D>().AddForce(
-                    new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical),
-                    ForceMode2D.Force
-                );
-                fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                if (fish.gameObject.name == "Fish1L(Clone)" || fish.gameObject.name == "Fish1R(Clone)" || fish.gameObject.name == "Fish2L(Clone)" || fish.gameObject.name == "Fish2R(Clone)")
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical * 1.22f),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale * 1.3f * 1.3f;
+                }
+                else if (fish.gameObject.name == "Fish3L(Clone)" || fish.gameObject.name == "Fish3R(Clone)")
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical * 1.15f),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale * 1.2f * 1.2f;
+                }
+                else
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                }
                 fish.GetComponent<FishScript>().text = text;
             }
             else
             {
                 GameObject fish = (GameObject)Instantiate(Fish[0], spawnPosition, Fish[0].GetComponent<Transform>().rotation);
-                fish.GetComponent<Rigidbody2D>().AddForce(
-                    new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical),
-                    ForceMode2D.Force
-                );
-                fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                if (fish.gameObject.name == "Fish1L(Clone)" || fish.gameObject.name == "Fish1R(Clone)" || fish.gameObject.name == "Fish2L(Clone)" || fish.gameObject.name == "Fish2R(Clone)")
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical * 1.22f),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale * 1.3f * 1.3f;
+                }
+                else if (fish.gameObject.name == "Fish3L(Clone)" || fish.gameObject.name == "Fish3R(Clone)")
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical * 1.15f),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale * 1.2f * 1.2f;
+                }
+                else
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                }
                 fish.GetComponent<FishScript>().text = text;
             }
         }
@@ -193,21 +269,59 @@ public class FishSpawnScript : MonoBehaviour {
             if (spawnPosition.x <= baitSpawnPoint.position.x)
             {
                 GameObject fish = (GameObject)Instantiate(Fish[1], spawnPosition, Fish[1].GetComponent<Transform>().rotation);
-                fish.GetComponent<Rigidbody2D>().AddForce(
-                    new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical),
-                    ForceMode2D.Force
-                );
-                fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                if (fish.gameObject.name == "Fish1L(Clone)" || fish.gameObject.name == "Fish1R(Clone)" || fish.gameObject.name == "Fish2L(Clone)" || fish.gameObject.name == "Fish2R(Clone)")
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical * 1.22f),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale * 1.3f * 1.3f;
+                }
+                else if (fish.gameObject.name == "Fish3L(Clone)" || fish.gameObject.name == "Fish3R(Clone)")
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical * 1.15f),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale * 1.2f * 1.2f;
+                }
+                else
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                }
                 fish.GetComponent<FishScript>().text = text;
             }
             else
             {
                 GameObject fish = (GameObject)Instantiate(Fish[0], spawnPosition, Fish[0].GetComponent<Transform>().rotation);
-                fish.GetComponent<Rigidbody2D>().AddForce(
-                    new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical),
-                    ForceMode2D.Force
-                );
-                fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                if (fish.gameObject.name == "Fish1L(Clone)" || fish.gameObject.name == "Fish1R(Clone)" || fish.gameObject.name == "Fish2L(Clone)" || fish.gameObject.name == "Fish2R(Clone)")
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical * 1.22f),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale * 1.3f * 1.3f;
+                }
+                else if (fish.gameObject.name == "Fish3L(Clone)" || fish.gameObject.name == "Fish3R(Clone)")
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical * 1.15f),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale * 1.2f * 1.2f;
+                }
+                else
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                }
                 fish.GetComponent<FishScript>().text = text;
             }
         }
@@ -234,26 +348,63 @@ public class FishSpawnScript : MonoBehaviour {
             Instantiate(shadow, spawnPosition, shadow.GetComponent<Transform>().rotation);
 
             yield return new WaitForSeconds(1);
-            Debug.Log((baitSpawnPoint.position.x - transform.position.x));
 
             if (spawnPosition.x <= baitSpawnPoint.position.x)
             {
                 GameObject fish = (GameObject)Instantiate(Fish[1], spawnPosition, Fish[1].GetComponent<Transform>().rotation);
-                fish.GetComponent<Rigidbody2D>().AddForce(
-                    new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical),
-                    ForceMode2D.Force
-                );
-                fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                if (fish.gameObject.name == "Fish1L(Clone)" || fish.gameObject.name == "Fish1R(Clone)" || fish.gameObject.name == "Fish2L(Clone)" || fish.gameObject.name == "Fish2R(Clone)")
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical * 1.22f),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale * 1.3f * 1.3f;
+                }
+                else if (fish.gameObject.name == "Fish3L(Clone)" || fish.gameObject.name == "Fish3R(Clone)")
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical * 1.15f),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale * 1.2f * 1.2f;
+                }
+                else
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform), 2.7f * speedVertical),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                }
                 fish.GetComponent<FishScript>().text = text;
             }
             else
             {
                 GameObject fish = (GameObject)Instantiate(Fish[0], spawnPosition, Fish[0].GetComponent<Transform>().rotation);
-                fish.GetComponent<Rigidbody2D>().AddForce(
-                    new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical),
-                    ForceMode2D.Force
-                );
-                fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                if (fish.gameObject.name == "Fish1L(Clone)" || fish.gameObject.name == "Fish1R(Clone)" || fish.gameObject.name == "Fish2L(Clone)" || fish.gameObject.name == "Fish2R(Clone)")
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical * 1.22f),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale * 1.3f * 1.3f;
+                }
+                else if (fish.gameObject.name == "Fish3L(Clone)" || fish.gameObject.name == "Fish3R(Clone)")
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical * 1.15f),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale * 1.2f * 1.2f;
+                }
+                else
+                {
+                    fish.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(speedHorizontalMapper(fish.transform) * -1f, 2.7f * speedVertical),
+                        ForceMode2D.Force
+                    );
+                    fish.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+                }
                 fish.GetComponent<FishScript>().text = text;
             }
         }

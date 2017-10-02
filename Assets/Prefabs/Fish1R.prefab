@@ -144,6 +144,7 @@ MonoBehaviour:
   bait: {fileID: 0}
   collided: 0
   inverted: 0
+  text: {fileID: 0}
 --- !u!212 &212389145122073198
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -176,7 +177,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300018, guid: 9f63112455e198144af09689b56fa93c, type: 3}
+  m_Sprite: {fileID: 21300010, guid: 9f63112455e198144af09689b56fa93c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

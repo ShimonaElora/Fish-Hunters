@@ -33,7 +33,7 @@ public class BaitScript : MonoBehaviour {
             {
                 collision.GetComponent<Collider2D>().gameObject.GetComponent<FishScript>().touchedBait = true;
                 collision.GetComponent<Collider2D>().gameObject.GetComponent<FishScript>().bait = gameObject;
-                //initialCount--;
+                initialCount--;
             }
         } else if (gameObject.name == "bait2(Clone)")
         {
@@ -41,7 +41,7 @@ public class BaitScript : MonoBehaviour {
             {
                 collision.GetComponent<Collider2D>().gameObject.GetComponent<FishScript>().touchedBait = true;
                 collision.GetComponent<Collider2D>().gameObject.GetComponent<FishScript>().bait = gameObject;
-                //initialCount--;
+                initialCount--;
             }
         }
         else if (gameObject.name == "bait3(Clone)")
@@ -50,7 +50,7 @@ public class BaitScript : MonoBehaviour {
             {
                 collision.GetComponent<Collider2D>().gameObject.GetComponent<FishScript>().touchedBait = true;
                 collision.GetComponent<Collider2D>().gameObject.GetComponent<FishScript>().bait = gameObject;
-                //initialCount--;
+                initialCount--;
             }
         }
         else if (gameObject.name == "bait4(Clone)")
@@ -59,7 +59,7 @@ public class BaitScript : MonoBehaviour {
             {
                 collision.GetComponent<Collider2D>().gameObject.GetComponent<FishScript>().touchedBait = true;
                 collision.GetComponent<Collider2D>().gameObject.GetComponent<FishScript>().bait = gameObject;
-                //initialCount--;
+                initialCount--;
             }
         }
         else if (gameObject.name == "bait5(Clone)")
@@ -68,7 +68,7 @@ public class BaitScript : MonoBehaviour {
             {
                 collision.GetComponent<Collider2D>().gameObject.GetComponent<FishScript>().touchedBait = true;
                 collision.GetComponent<Collider2D>().gameObject.GetComponent<FishScript>().bait = gameObject;
-                //initialCount--;
+                initialCount--;
             }
         }
 

@@ -14,6 +14,7 @@ public class DestroyerScript : MonoBehaviour {
         if (BaitSelectionScript.hasStarted)
         {
             gameObject.SetActive(true);
+            GetComponent<Collider2D>().enabled = true;
         }
 		
 	}

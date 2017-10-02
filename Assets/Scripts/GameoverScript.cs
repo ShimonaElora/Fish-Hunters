@@ -15,8 +15,8 @@ public class GameoverScript : MonoBehaviour {
     HookManagerScript hookManagerScript;
     public GameObject hookSelectionView;
     public GameObject baitSelectionView;
-    public GameObject selectionOverlay;
     public GameObject startButton;
+    public GameObject BaitSelection;
 
 	// Use this for initialization
 	void Start () {
@@ -25,7 +25,6 @@ public class GameoverScript : MonoBehaviour {
         Gameover.SetActive(false);
         hookManagerScript = GameObject.Find("Hook Hanger").GetComponent<HookManagerScript>();
         baitsActive = hookManagerScript.numberHooks;
-        Debug.Log(baitsActive);
         switch (baitsActive)
         {
             case 1:
@@ -57,7 +56,6 @@ public class GameoverScript : MonoBehaviour {
             if (hookManagerScript.baitInstantiated[i].GetComponent<BaitScript>().initialCount <= 0)
             {
                 checker = checker * 10 + 1;
-                Debug.Log(checker + " " + check);
             }
             else
             {
@@ -65,27 +63,27 @@ public class GameoverScript : MonoBehaviour {
             }
         }
 
-        if (checker == check)
+        if (checker == check && BaitSelectionScript.hasStarted)
         {
             gameover = true;
-            BaitSelectionScript.hasStarted = false;
-        } else
-        {
-            checker = 0;
         }
-        if (gameover && BaitSelectionScript.hasStarted)
+
+        checker = 0;
+
+        if (gameover)
         {
             Gameover.SetActive(true);
+            BaitSelectionScript.hasStarted = false;
         }
 	}
 
     void replayClicked()
     {
-        Debug.Log("here");
         gameover = false;
+        Gameover.SetActive(false);
+        BaitSelection.SetActive(true);
         hookSelectionView.SetActive(true);
         baitSelectionView.SetActive(true);
-        selectionOverlay.SetActive(true);
         startButton.SetActive(true);
     }
 }
